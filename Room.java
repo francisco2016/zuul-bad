@@ -18,8 +18,9 @@ public class Room
     public Room northExit;
     public Room southExit;
     public Room eastExit;
+    public Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110 
     public Room westExit;
-    public Room southeast;//--------------------------------------------------------------------------------------------------- 0110 
+    
 
     /**
      * Create a room described "description". Initially, it has
@@ -48,11 +49,12 @@ public class Room
             eastExit = east;
         if(south != null)
             southExit = south;
+         if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
+           southeastExit = southeast;
+    
         if(west != null)
             westExit = west;
-        if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
-           westExit = southeast;
-    }
+    }  
 
     /**
      * @return The description of the room.
