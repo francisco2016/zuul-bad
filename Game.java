@@ -11,7 +11,7 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
+ * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
 
@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -29,28 +29,28 @@ public class Game
         parser = new Parser();
     }
 
-    /**
-     * Create all the rooms and link their exits together.
-     */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        Room vesti, coci, traste, salon, biblio, h1,         h2, h3, h4, h5;
 
-        currentRoom = outside;  // start game outside
+        // create the rooms
+        vesti = new Room("este vestíbulo me dice que estamos dentro.");
+        coci = new Room("  en la cocina, me tomo un vaso de agua.");
+        traste = new Room("en este trastero hay cosas interesantes.");
+        salon = new Room("en este salón ya se ve algo más de color.");
+        biblio = new Room(" biblioteca para leer las noticias.");
+        h1 = new Room(" h1 habitación standar, nada nuevo");
+        h2 = new Room(" h2 habitación standar, nada nuevo");
+        // initialise room exits
+        vesti.setExits(salon, coci, null, null);
+        coci.setExits(traste, null, null, vesti);
+        traste.setExits(null, null, coci, null);
+        salon.setExits(h1, null, vesti, biblio);
+        biblio.setExits(h2, salon, null,null);
+        h1.setExits(null, null, salon, h2);
+       
+
+        currentRoom = vesti; 
     }
 
     /**
@@ -62,7 +62,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -83,6 +83,7 @@ public class Game
         System.out.println();
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
+ 
         if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
@@ -178,6 +179,7 @@ public class Game
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
+            
             if(currentRoom.northExit != null) {
                 System.out.print("north ");
             }
@@ -209,4 +211,6 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+
+   
 }
