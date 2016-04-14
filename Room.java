@@ -15,12 +15,12 @@
  */
 public class Room 
 {
-    private String description;
-   public Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    private Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110 
+   private String description;
+   private Room northExit;
+   private Room southExit;
+   private Room eastExit;
+   private Room westExit;
+   private Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110 
 
     /**
      * Create a room described "description". Initially, it has
