@@ -159,7 +159,7 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
 
         //         if(direction.equals("north")) {
         //             nextRoom = currentRoom.northExit;
@@ -221,21 +221,22 @@ public class Game
      *  resuelve la repetición de código existente en los metodos printWelcome ygoRoom 
      */
     private void printLocationInfo(){
-        if(currentRoom.northExit != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("west ");
-        }
-        if(currentRoom.southeastExit != null) {//-------------------------------------------0110
-            System.out.print("southeast ");
-        }
+        System.out.println(currentRoom.getExitString());//--------------------------------------------------- 0111
+        //         if(currentRoom.northExit != null) {
+        //             System.out.print("north ");
+        //         }
+        //         if(currentRoom.eastExit != null) {
+        //             System.out.print("east ");
+        //         }
+        //         if(currentRoom.southExit != null) {
+        //             System.out.print("south ");
+        //         }
+        //         if(currentRoom.westExit != null) {
+        //             System.out.print("west ");
+        //         }
+        //         if(currentRoom.southeastExit != null) {//-------------------------------------------0110
+        //             System.out.print("southeast ");
+        //         }
     }
 
 }
