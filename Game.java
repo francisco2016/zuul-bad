@@ -39,7 +39,7 @@ public class Game
         traste = new Room("en este trastero hay cosas interesantes.");
         terraza = new Room("terraza con vistas al mar.");
         salon = new Room("en este salón ya se ve algo más de color.");
-        biblio = new Room(" biblioteca para leer las noticias.");
+        biblio = new Room("en esta biblioteca está lo que buscamos.");
         h1 = new Room(" h1 habitación standar, nada nuevo");
    
         // initialise room exits
@@ -48,10 +48,9 @@ public class Game
         traste.setExits(terraza, null, coci, h1,  salon);
         terraza.setExits(null, null, traste,null, null);
         salon.setExits(h1, traste, vesti,  biblio,null);
- 
+        biblio.setExits(null, salon, null,  null,null);
         h1.setExits(null, traste, salon,null,null);
        
-
         currentRoom = vesti; 
     }
 
@@ -161,6 +160,8 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
+         //a partir del 0111 al atributo currentRoom le pasamos el mt getExit(direction)-------------0111
+              //en vez de los atributo de la clase Room, porque ahora son privados-
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
         }
@@ -168,13 +169,13 @@ public class Game
             nextRoom = currentRoom.eastExit;
         }
         if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
+            nextRoom = currentRoom.soutthExit;
         }
         if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;   
+            nextRoom = currentRoom.westExit;  
         }
         if(direction.equals("southeast")) {
-            nextRoom = currentRoom.southeastExit;   
+            nextRoom = currentRoom.southeastExit;  
         }
 
         if (nextRoom == null) {
@@ -233,7 +234,7 @@ public class Game
         if(currentRoom.westExit != null) {
             System.out.print("west ");
         }
-         if(currentRoom.southeastExit != null) {//-------------------------------------------0100
+         if(currentRoom.southeastExit != null) {//-------------------------------------------0110
             System.out.print("southeast ");
         }
     }

@@ -1,3 +1,4 @@
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -14,13 +15,12 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110 
-    public Room westExit;
-    
+    private String description;
+   public Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110 
 
     /**
      * Create a room described "description". Initially, it has
@@ -49,11 +49,11 @@ public class Room
             eastExit = east;
         if(south != null)
             southExit = south;
-         if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
-           southeastExit = southeast;
-    
         if(west != null)
             westExit = west;
+        if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
+           southeastExit = southeast;
+    
     }  
 
     /**
@@ -63,5 +63,23 @@ public class Room
     {
         return description;
     }
-
+    
+    /**
+     * toma como parámetro una cadena que represente una dirección y devuelva el objeto de la clase Room asociado a esa salida o null si no hay salida.
+     */
+    public Room getExit(String adress){//----------------------------------------------------------------- 0111
+        Room room = null;
+        if(adress.equals("north"))
+        room = northExit;
+        if(adress.equals("east"))
+        room = eastExit;
+        if(adress.equals("south"))
+        room = southExit;
+        if(adress.equals("west"))
+        room =westExit;
+        if(adress.equals("southeast"))
+        room = southeastExit;
+        return room;
+    }
+    
 }
