@@ -43,13 +43,13 @@ public class Game
         h1 = new Room(" h1 habitación standar, nada nuevo");
 
         // initialise room exits
-        vesti.setExits(salon, coci, null,null, null);
-        coci.setExits(traste, null, null, vesti, null);
-        traste.setExits(terraza, null, coci, h1,  salon);
-        terraza.setExits(null, null, traste,null, null);
-        salon.setExits(h1, traste, vesti,  biblio,null);
-        biblio.setExits(null, salon, null,  null,null);
-        h1.setExits(null, traste, salon,null,null);
+        vesti.setExits(salon, coci, null,null, null, null );
+        coci.setExits(traste, null, null, vesti, null, null);
+        traste.setExits(terraza, null, coci, h1,  salon, null);
+        terraza.setExits(null, null, traste,null, null, null);
+        salon.setExits(h1, traste, vesti,  biblio,null, traste);
+        biblio.setExits(null, salon, null,  null,null, null);
+        h1.setExits(null, traste, salon,null,null, null);
 
         currentRoom = vesti; 
     }
@@ -85,18 +85,7 @@ public class Game
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
         printLocationInfo();
-        //         if(currentRoom.northExit != null) {
-        //             System.out.print("north ");
-        //         }
-        //         if(currentRoom.eastExit != null) {
-        //             System.out.print("east ");
-        //         }
-        //         if(currentRoom.southExit != null) {
-        //             System.out.print("south ");
-        //         }
-        //         if(currentRoom.westExit != null) {
-        //             System.out.print("west ");
-        //         }
+ 
         System.out.println();
     }
 
@@ -138,7 +127,7 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at the vestíbulo.");
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   go quit help");
@@ -161,22 +150,7 @@ public class Game
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
 
-        //         if(direction.equals("north")) {
-        //             nextRoom = currentRoom.northExit;
-        //         }
-        //         if(direction.equals("east")) {
-        //             nextRoom = currentRoom.eastExit;
-        //         }
-        //         if(direction.equals("south")) {
-        //             nextRoom = currentRoom.soutthExit;
-        //         }
-        //         if(direction.equals("west")) {
-        //             nextRoom = currentRoom.westExit;  
-        //         }
-        //         if(direction.equals("southeast")) {
-        //             nextRoom = currentRoom.southeastExit;  
-        //         }
-
+   
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -185,20 +159,9 @@ public class Game
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
             printLocationInfo();
-            //             if(currentRoom.northExit != null) {
-            //                 System.out.print("north ");
-            //             }
-            //             if(currentRoom.eastExit != null) {
-            //                 System.out.print("east ");
-            //             }
-            //             if(currentRoom.southExit != null) {
-            //                 System.out.print("south ");
-            //             }
-            //             if(currentRoom.westExit != null) {
-            //                 System.out.print("west ");
-            //             }
+                        }
             System.out.println();
-        }
+       
     }
 
     /** 
@@ -222,21 +185,7 @@ public class Game
      */
     private void printLocationInfo(){
         System.out.println(currentRoom.getExitString());//--------------------------------------------------- 0111
-        //         if(currentRoom.northExit != null) {
-        //             System.out.print("north ");
-        //         }
-        //         if(currentRoom.eastExit != null) {
-        //             System.out.print("east ");
-        //         }
-        //         if(currentRoom.southExit != null) {
-        //             System.out.print("south ");
-        //         }
-        //         if(currentRoom.westExit != null) {
-        //             System.out.print("west ");
-        //         }
-        //         if(currentRoom.southeastExit != null) {//-------------------------------------------0110
-        //             System.out.print("southeast ");
-        //         }
+         
     }
 
 }
