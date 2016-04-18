@@ -47,7 +47,7 @@ public class Game
         coci.setExits(traste, null, null, vesti, null, null);
         traste.setExits(terraza, null, coci, h1,  salon, null);
         terraza.setExits(null, null, traste,null, null, null);
-        salon.setExits(h1, traste, vesti,  biblio,null, traste);
+        salon.setExits(h1, traste, vesti,  biblio,null, null);
         biblio.setExits(null, salon, null,  null,null, null);
         h1.setExits(null, traste, salon,null,null, null);
 
