@@ -43,13 +43,31 @@ public class Game
         h1 = new Room(" h1 habitación standar, nada nuevo");
 
         // initialise room exits
-        vesti.setExits(salon, coci, null,null, null, null );
-        coci.setExits(traste, null, null, vesti, null, null);
-        traste.setExits(terraza, null, coci, h1,  salon, null);
-        terraza.setExits(null, null, traste,null, null, null);
-        salon.setExits(h1, traste, vesti,  biblio,null, null);
-        biblio.setExits(null, salon, null,  null,null, null);
-        h1.setExits(null, traste, salon,null,null, null);
+        
+        vesti.setExit("north ", salon);
+        vesti.setExit("east ", coci);
+        coci.setExit("north " , traste);
+        coci.setExit("west ", vesti);
+        traste.setExit("north ", terraza);
+        traste.setExit("south ", coci);
+        traste.setExit("west ", h1);
+        traste.setExit("southeast ", salon);
+        terraza.setExit("south ", traste );
+        salon.setExit("north ", h1);
+        salon.setExit("east ", traste);
+        salon.setExit("south ", vesti);
+        salon.setExit("west ", biblio);
+        biblio.setExit("east ", salon);
+        h1.setExit("east ", traste);
+        h1.setExit("south ", salon);
+        
+        //vesti.setExits(salon, coci, null,null, null, null );
+        //coci.setExits(traste, null, null, vesti, null, null);
+        //traste.setExits(terraza, null, coci, h1,  salon, null);
+        //terraza.setExits(null, null, traste,null, null, null);
+        //salon.setExits(h1, traste, vesti,  biblio,null, null);
+        //biblio.setExits(null, salon, null,  null,null, null);
+        //h1.setExits(null, traste, salon,null,null, null);
 
         currentRoom = vesti; 
     }

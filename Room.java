@@ -122,11 +122,16 @@ public class Room
      */
     public String getExitString(){//----------------------------------------------------------------- 0111
         String salida = "";
+        System.out.println(exit);
+        System.out.println(exit.keySet());
+        System.out.println(exit.values());
+        System.out.println(exit.get("north"));
         //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
         //         if(northExit != null)---------------------------if(exit.get(north) != null)
         //             salida+= " north ";------------------------- salida+= " north ";---------------------------0112
-        if(exit.get("north") != null)
+        if(exit.get("north") != null) {
             salida += "north ";
+        }
         if(exit.get("east") != null)
             salida += "east ";
         if(exit.get("south") != null)
