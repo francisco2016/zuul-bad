@@ -19,12 +19,6 @@ public class Room
     private String description;
     //HashMap para enlazar cadenas con objetos de tipo Room
     private HashMap<String, Room> exit;//-------------------------------------------------------------------------- 0112
-    //    private Room northExit;
-    //    private Room southExit;
-    //    private Room eastExit;
-    //    private Room westExit;
-    //    private Room southeastExit;//---------------------------------------------------------------------------- 0110
-    //    private Room northeastExit;//---------------------------------------------------------------------------- 0111
 
     /**
      * Create a room described "description". Initially, it has
@@ -37,36 +31,6 @@ public class Room
         exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
 
     }
-
-    //     /**
-    //      * Define the exits of this room.  Every direction either leads
-    //      * to another room or is null (no exit there).
-    //      * @param north The north exit.
-    //      * @param east The east east.
-    //      * @param south The south exit.
-    //      * @param west The west exit.
-    //      */
-    //     public void setExits(Room north, Room east, Room south, Room west, Room southeast, Room northeast ) 
-    //     {
-    //         //Al eliminar los atributos y crear el HashMap, lo que se hace es: En vez de asignar el valor north al atributo
-    //         //nortgExit, lo que hacemos es decirle que en mi HashMap exit va ha haber una entrada que ligue la cadena "north" con
-    //         //el valor del parámetro north que es de tipo Room. y así para todos los demás parámetros 
-    //         //         if(north != null)      ---------------------- if(north != null)
-    //         //             northExit = north; ---------------------- exit.put("north", north); ----------------------------- 0112
-    //         if(north != null)
-    //             exit.put("north", north);
-    //         if(east != null)
-    //             exit.put("east", east);
-    //         if(south != null)
-    //             exit.put("south", south);
-    //         if(west != null)
-    //             exit.put("west", west);
-    //         if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
-    //             exit.put("southeast", southeast);
-    //         if(northeast != null)  //------------------------------------------------------------------------------------------------ 0111 
-    //             exit.put("northeast", northeast);
-    // 
-    //     }  
 
     /**
      * Define an exit from this room.
@@ -94,25 +58,27 @@ public class Room
      * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        Room room = null;//----------------------------------------------------------------------------- 0112
+        //para simplificar el codigo, lo que hago es devolve el valor asociado a la clave adress
+        return exit.get(adress);
+        // Room room = null;//----------------------------------------------------------------------------- 0112
         //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
         //ahora hay que obtener la variable, objeto Room asociado a cada salida, utilizando el mt get() del HashMap y 
         // la clave correspondiente
         //         if(adress.equals("north"))-----------------------------------if(adress.equals("north"))
         //             room = northExit;  --------------------------------------room = exit.get("north");
-        if(adress.equals("north"))
-            room = exit.get("north");
-        if(adress.equals("east"))
-            room = exit.get("east");
-        if(adress.equals("south"))
-            room = exit.get("south");
-        if(adress.equals("west"))
-            room = exit.get("west");
-        if(adress.equals("southeast"))
-            room = exit.get("southeast");
-        if(adress.equals("northeast"))
-            room = exit.get("northeast");
-        return room;
+        //         if(adress.equals("north"))
+        //             room = exit.get("north");
+        //         if(adress.equals("east"))
+        //             room = exit.get("east");
+        //         if(adress.equals("south"))
+        //             room = exit.get("south");
+        //         if(adress.equals("west"))
+        //             room = exit.get("west");
+        //         if(adress.equals("southeast"))
+        //             room = exit.get("southeast");
+        //         if(adress.equals("northeast"))
+        //             room = exit.get("northeast");
+        //         return room;
     }
 
     /**

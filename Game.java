@@ -60,14 +60,6 @@ public class Game
         biblio.setExit("east ", salon);
         h1.setExit("east ", traste);
         h1.setExit("south ", salon);
-        
-        //vesti.setExits(salon, coci, null,null, null, null );
-        //coci.setExits(traste, null, null, vesti, null, null);
-        //traste.setExits(terraza, null, coci, h1,  salon, null);
-        //terraza.setExits(null, null, traste,null, null, null);
-        //salon.setExits(h1, traste, vesti,  biblio,null, null);
-        //biblio.setExits(null, salon, null,  null,null, null);
-        //h1.setExits(null, traste, salon,null,null, null);
 
         currentRoom = vesti; 
     }
