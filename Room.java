@@ -38,35 +38,48 @@ public class Room
 
     }
 
-    /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
-     */
-    public void setExits(Room north, Room east, Room south, Room west, Room southeast, Room northeast ) 
-    {
-        //Al eliminar los atributos y crear el HashMap, lo que se hace es: En vez de asignar el valor north al atributo
-        //nortgExit, lo que hacemos es decirle que en mi HashMap exit va ha haber una entrada que ligue la cadena "north" con
-        //el valor del parámetro north que es de tipo Room. y así para todos los demás parámetros 
-        //         if(north != null)      ---------------------- if(north != null)
-        //             northExit = north; ---------------------- exit.put("north", north); ----------------------------- 0112
-        if(north != null)
-            exit.put("north", north);
-        if(east != null)
-            exit.put("east", east);
-        if(south != null)
-            exit.put("south", south);
-        if(west != null)
-            exit.put("west", west);
-        if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
-            exit.put("southeast", southeast);
-        if(northeast != null)  //------------------------------------------------------------------------------------------------ 0111 
-            exit.put("northeast", northeast);
+    //     /**
+    //      * Define the exits of this room.  Every direction either leads
+    //      * to another room or is null (no exit there).
+    //      * @param north The north exit.
+    //      * @param east The east east.
+    //      * @param south The south exit.
+    //      * @param west The west exit.
+    //      */
+    //     public void setExits(Room north, Room east, Room south, Room west, Room southeast, Room northeast ) 
+    //     {
+    //         //Al eliminar los atributos y crear el HashMap, lo que se hace es: En vez de asignar el valor north al atributo
+    //         //nortgExit, lo que hacemos es decirle que en mi HashMap exit va ha haber una entrada que ligue la cadena "north" con
+    //         //el valor del parámetro north que es de tipo Room. y así para todos los demás parámetros 
+    //         //         if(north != null)      ---------------------- if(north != null)
+    //         //             northExit = north; ---------------------- exit.put("north", north); ----------------------------- 0112
+    //         if(north != null)
+    //             exit.put("north", north);
+    //         if(east != null)
+    //             exit.put("east", east);
+    //         if(south != null)
+    //             exit.put("south", south);
+    //         if(west != null)
+    //             exit.put("west", west);
+    //         if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
+    //             exit.put("southeast", southeast);
+    //         if(northeast != null)  //------------------------------------------------------------------------------------------------ 0111 
+    //             exit.put("northeast", northeast);
+    // 
+    //     }  
 
-    }  
+    /**
+     * Define an exit from this room.
+     * @param direction The direction of the exit.
+     * @param neighbor The room in the given direction.--------------------------------------------------------------------------------------- 0113
+     */
+    //-0113 para facilitar el que la clase Game pueda elegir la salida de una localización, tenemos que eliminar el mt setExits(R) porque con sus parámetros está limitando las
+    //posibilidades.
+    //para ello almacenamos en el HashMap la cadena que se indique como parámetro enlazada con la habitación que es indique como parámetro. En direction podemos especificar
+    //cualquier tipo de dirección,,, subir, bajar,noroeste etc. y siempre quedará almacenada en el HashMap exit
+    public void setExit(String direction, Room neighbor){
+        exit.put(direction, neighbor);
+    }//-0113 esto supone tener que hacer cambios en la clase Game. Ahora podemos borrar el mt setExits(R)
 
     /**
      * @return The description of the room.
