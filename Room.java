@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 /**
  * Class Room - a room in an adventure game.
@@ -15,13 +16,15 @@
  */
 public class Room 
 {
-   private String description;
-   private Room northExit;
-   private Room southExit;
-   private Room eastExit;
-   private Room westExit;
-   private Room southeastExit;//--------------------------------------------------------------------------------------------------- 0110
-   private Room northeastExit;//--------------------------------------------------------------------------------------------------- 0111
+    private String description;
+    //HashMap para enlazar cadenas con objetos de tipo Room
+    private HashMap<String, Room> exit;//-------------------------------------------------------------------------- 0112
+    //    private Room northExit;
+    //    private Room southExit;
+    //    private Room eastExit;
+    //    private Room westExit;
+    //    private Room southeastExit;//---------------------------------------------------------------------------- 0110
+    //    private Room northeastExit;//---------------------------------------------------------------------------- 0111
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,9 +32,10 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
-    {
+    public Room(String description) {
         this.description = description;
+        exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
+
     }
 
     /**
@@ -44,19 +48,24 @@ public class Room
      */
     public void setExits(Room north, Room east, Room south, Room west, Room southeast, Room northeast ) 
     {
+        //Al eliminar los atributos y crear el HashMap, lo que se hace es: En vez de asignar el valor north al atributo
+        //nortgExit, lo que hacemos es decirle que en mi HashMap exit va ha haber una entrada que ligue la cadena "north" con
+        //el valor del parámetro north que es de tipo Room. y así para todos los demás parámetros 
+        //         if(north != null)      ---------------------- if(north != null)
+        //             northExit = north; ---------------------- exit.put("north", north); ----------------------------- 0112
         if(north != null)
-            northExit = north;
+            exit.put("north", north);
         if(east != null)
-            eastExit = east;
+            exit.put("east", east);
         if(south != null)
-            southExit = south;
+            exit.put("south", south);
         if(west != null)
-            westExit = west;
+            exit.put("west", west);
         if(southeast != null)  //--------------------------------------------------------------------------------------------------- 0110 
-           southeastExit = southeast;
+            exit.put("southeast", southeast);
         if(northeast != null)  //------------------------------------------------------------------------------------------------ 0111 
-           northeastExit = northeast;
-    
+            exit.put("northeast", northeast);
+
     }  
 
     /**
@@ -66,48 +75,56 @@ public class Room
     {
         return description;
     }
-    
+
     /**
-     * toma como parámetro una cadena que represente una dirección y devuelva el objeto de la clase Room asociado a esa salida o null si no hay salida.
+     * toma como parámetro una cadena que represente una dirección y devuelva el objeto de la clase Room asociado a esa salida 
+     * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        Room room = null;
+        Room room = null;//----------------------------------------------------------------------------- 0112
+        //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
+        //ahora hay que obtener la variable, objeto Room asociado a cada salida, utilizando el mt get() del HashMap y 
+        // la clave correspondiente
+        //         if(adress.equals("north"))-----------------------------------if(adress.equals("north"))
+        //             room = northExit;  --------------------------------------room = exit.get("north");
         if(adress.equals("north"))
-        room = northExit;
+            room = exit.get("north");
         if(adress.equals("east"))
-        room = eastExit;
+            room = exit.get("east");
         if(adress.equals("south"))
-        room = southExit;
+            room = exit.get("south");
         if(adress.equals("west"))
-        room =westExit;
+            room = exit.get("west");
         if(adress.equals("southeast"))
-        room = southeastExit;
+            room = exit.get("southeast");
         if(adress.equals("northeast"))
-        room = northeastExit;
+            room = exit.get("northeast");
         return room;
     }
-    
-         /**
-      * Return a description of the room's exits.   
-      * For example: "Exits: north east west"
-      * @ return A description of the available exits.
-      */
+
+    /**
+     * Return a description of the room's exits.   
+     * For example: "Exits: north east west"
+     * @ return A description of the available exits.
+     */
     public String getExitString(){//----------------------------------------------------------------- 0111
         String salida = "";
-        if(northExit != null)
-            salida+= " north ";
-        if(eastExit != null)
-            salida+= " east ";
-        if(southExit != null)
-            salida+= " south ";
-        if(westExit != null)
-            salida+= " west ";
-        if(southeastExit != null)
-            salida+= " southeast ";
-        if(northeastExit != null)
-            salida+= " northeast ";
+        //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
+        //         if(northExit != null)---------------------------if(exit.get(north) != null)
+        //             salida+= " north ";------------------------- salida+= " north ";---------------------------0112
+        if(exit.get("north") != null)
+            salida += "north ";
+        if(exit.get("east") != null)
+            salida += "east ";
+        if(exit.get("south") != null)
+            salida += "south ";
+        if(exit.get("west") != null)
+            salida += "west ";
+        if(exit.get("southeast") != null)
+            salida += "southeast ";
+        if(exit.get("northeast") != null)
+            salida += "northeast ";
         return salida;
     }
 
-    
 }
