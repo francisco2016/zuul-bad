@@ -44,22 +44,28 @@ public class Game
 
         // initialise room exits
         
-        vesti.setExit("north ", salon);
-        vesti.setExit("east ", coci);
-        coci.setExit("north " , traste);
-        coci.setExit("west ", vesti);
-        traste.setExit("north ", terraza);
-        traste.setExit("south ", coci);
-        traste.setExit("west ", h1);
-        traste.setExit("southeast ", salon);
-        terraza.setExit("south ", traste );
-        salon.setExit("north ", h1);
-        salon.setExit("east ", traste);
-        salon.setExit("south ", vesti);
-        salon.setExit("west ", biblio);
-        biblio.setExit("east ", salon);
-        h1.setExit("east ", traste);
-        h1.setExit("south ", salon);
+        vesti.setExit("north", salon);
+        vesti.setExit("east", coci);
+        
+        coci.setExit("north" , traste);
+        coci.setExit("west", vesti);
+        
+        traste.setExit("north", terraza);
+        traste.setExit("south", coci);
+        traste.setExit("west", h1);
+        traste.setExit("southeast", salon);
+        
+        terraza.setExit("south", traste );
+        
+        salon.setExit("north", h1);
+        salon.setExit("east", traste);
+        salon.setExit("south", vesti);
+        salon.setExit("west", biblio);
+        
+        biblio.setExit("east", salon);
+        
+        h1.setExit("east", traste);
+        h1.setExit("south", salon);
 
         currentRoom = vesti; 
     }

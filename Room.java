@@ -1,5 +1,5 @@
 import java.util.HashMap;
-
+import java.util.Set;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -58,7 +58,7 @@ public class Room
      * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        //para simplificar el codigo, lo que hago es devolve el valor asociado a la clave adress
+        //para simplificar el codigo, lo que hago es devolve el valor asociado a la clave adress---0113
         return exit.get(adress);
         // Room room = null;//----------------------------------------------------------------------------- 0112
         //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
@@ -87,28 +87,31 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){//----------------------------------------------------------------- 0111
-        String salida = "";
-        System.out.println(exit);
-        System.out.println(exit.keySet());
-        System.out.println(exit.values());
-        System.out.println(exit.get("north"));
-        //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
-        //         if(northExit != null)---------------------------if(exit.get(north) != null)
-        //             salida+= " north ";------------------------- salida+= " north ";---------------------------0112
-        if(exit.get("north") != null) {
-            salida += "north ";
+        //         String salida = "";
+        //  
+        //         //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
+        //         //         if(northExit != null)---------------------------if(exit.get(north) != null)
+        //         //             salida+= " north ";------------------------- salida+= " north ";---------------------------0112
+        //         if(exit.get("north") != null) {
+        //             salida += "north ";
+        //         }
+        //         if(exit.get("east") != null)
+        //             salida += "east ";
+        //         if(exit.get("south") != null)
+        //             salida += "south ";
+        //         if(exit.get("west") != null)
+        //             salida += "west ";
+        //         if(exit.get("southeast") != null)
+        //             salida += "southeast ";
+        //         if(exit.get("northeast") != null)
+        //             salida += "northeast ";
+        //         return salida;
+        Set<String> namesOfDirections = exit.keySet();//---------------------------------------0113    0113
+        String exitsDescription = "";
+        for(String direction : namesOfDirections){
+            exitsDescription += direction + " ";
         }
-        if(exit.get("east") != null)
-            salida += "east ";
-        if(exit.get("south") != null)
-            salida += "south ";
-        if(exit.get("west") != null)
-            salida += "west ";
-        if(exit.get("southeast") != null)
-            salida += "southeast ";
-        if(exit.get("northeast") != null)
-            salida += "northeast ";
-        return salida;
+        return exitsDescription;
     }
 
 }
