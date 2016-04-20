@@ -200,7 +200,7 @@ public class Game
      *  resuelve la repetición de código existente en los metodos printWelcome ygoRoom 
      */
     private void printLocationInfo(){
-        System.out.println(currentRoom.getExitString());//--------------------------------------------------- 0111
+        System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
          
     }
 

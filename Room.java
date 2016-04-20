@@ -35,12 +35,13 @@ public class Room
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
-     * @param neighbor The room in the given direction.--------------------------------------------------------------------------------------- 0113
+     * @param neighbor The room in the given direction.--------------------------------------------------------------------- 0113
      */
-    //-0113 para facilitar el que la clase Game pueda elegir la salida de una localización, tenemos que eliminar el mt setExits(R) porque con sus parámetros está limitando las
-    //posibilidades.
-    //para ello almacenamos en el HashMap la cadena que se indique como parámetro enlazada con la habitación que es indique como parámetro. En direction podemos especificar
-    //cualquier tipo de dirección,,, subir, bajar,noroeste etc. y siempre quedará almacenada en el HashMap exit
+    //-0113 para facilitar el que la clase Game pueda elegir la salida de una localización, tenemos que eliminar el mt setExits(R) 
+    // porque con sus parámetros está limitando las posibilidades.
+    //para ello almacenamos en el HashMap la cadena que se indique como parámetro enlazada con la habitación que es indique
+    // como parámetro. En direction podemos especificar cualquier tipo de dirección,,, subir, bajar,noroeste etc. y siempre 
+    //quedará almacenada en el HashMap exit
     public void setExit(String direction, Room neighbor){
         exit.put(direction, neighbor);
     }//-0113 esto supone tener que hacer cambios en la clase Game. Ahora podemos borrar el mt setExits(R)
@@ -58,27 +59,9 @@ public class Room
      * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        //para simplificar el codigo, lo que hago es devolve el valor asociado a la clave adress---0113
+        
         return exit.get(adress);
-        // Room room = null;//----------------------------------------------------------------------------- 0112
-        //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
-        //ahora hay que obtener la variable, objeto Room asociado a cada salida, utilizando el mt get() del HashMap y 
-        // la clave correspondiente
-        //         if(adress.equals("north"))-----------------------------------if(adress.equals("north"))
-        //             room = northExit;  --------------------------------------room = exit.get("north");
-        //         if(adress.equals("north"))
-        //             room = exit.get("north");
-        //         if(adress.equals("east"))
-        //             room = exit.get("east");
-        //         if(adress.equals("south"))
-        //             room = exit.get("south");
-        //         if(adress.equals("west"))
-        //             room = exit.get("west");
-        //         if(adress.equals("southeast"))
-        //             room = exit.get("southeast");
-        //         if(adress.equals("northeast"))
-        //             room = exit.get("northeast");
-        //         return room;
+       
     }
 
     /**
@@ -87,25 +70,7 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){//----------------------------------------------------------------- 0111
-        //         String salida = "";
-        //  
-        //         //Este mt también se modifica por que está leyendo de los atributos que teníamos: northExit, eastExit...
-        //         //         if(northExit != null)---------------------------if(exit.get(north) != null)
-        //         //             salida+= " north ";------------------------- salida+= " north ";---------------------------0112
-        //         if(exit.get("north") != null) {
-        //             salida += "north ";
-        //         }
-        //         if(exit.get("east") != null)
-        //             salida += "east ";
-        //         if(exit.get("south") != null)
-        //             salida += "south ";
-        //         if(exit.get("west") != null)
-        //             salida += "west ";
-        //         if(exit.get("southeast") != null)
-        //             salida += "southeast ";
-        //         if(exit.get("northeast") != null)
-        //             salida += "northeast ";
-        //         return salida;
+ 
         Set<String> namesOfDirections = exit.keySet();//---------------------------------------0113    0113
         String exitsDescription = "";
         for(String direction : namesOfDirections){
@@ -113,5 +78,16 @@ public class Room
         }
         return exitsDescription;
     }
+    
+    /**
+     * Return a long description of this room, of the form:---------------------------------------- 0114
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+ 	 */
+ 	public String getLongDescription(){
+ 	  return "Estamos " + description + ".\n" + getExitString();
+ 	}
+
 
 }
