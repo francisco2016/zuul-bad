@@ -38,4 +38,18 @@ public class CommandWords
         // if we get here, the string was not found in the commands
         return false;
     }
+    
+    /**
+     * Print all valid commands to System.out --------------------------------------------    0116
+     *   muestre en la terminal todos los comandos disponibles:
+     */
+    public void showAll(){
+        //los comandos al estar almacenados en un [], hago un bucle for each para que recorra la colección y los muestre por Plla
+        for(String command : validCommands){
+             System.out.print(command + " ");
+        }
+        System.out.println();
+    }
+   
+    
 }

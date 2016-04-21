@@ -29,7 +29,14 @@ public class Parser
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
-
+    
+    /**
+     * para retornar el atributo commands ---------------------------------------------------------- 0116
+     */
+    public CommandWords getCommands(){
+        return commands;
+    }
+    
     /**
      * @return The next command from the user.
      */

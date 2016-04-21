@@ -69,7 +69,7 @@ public class Game
 
         currentRoom = vesti; 
     }
-
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -129,7 +129,7 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        else if (commandWord.equals("look")) {
+        else if (commandWord.equals("look")) {//añadido para -------------------------------------------------------- 0115
             printLocationInfo();
         }
 
@@ -149,7 +149,8 @@ public class Game
         System.out.println("around at the vestíbulo.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        //System.out.println("   go quit help look"); -------------sustituido por....
+        parser.getCommands().showAll();  //-------------------------0116
     }
 
     /** 
