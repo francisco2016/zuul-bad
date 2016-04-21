@@ -19,17 +19,20 @@ public class Room
     private String description;
     //HashMap para enlazar cadenas con objetos de tipo Room
     private HashMap<String, Room> exit;//-------------------------------------------------------------------------- 0112
-
+    //para añadir items a las habitaciones.//--------------------------------------------------------------------- 0117
+    private String descripcionObjeto;
+    private int peso;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) {
+      public Room(String description, String descripcionObjeto, int peso) {
         this.description = description;
         exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
-
+        this.descripcionObjeto = descripcionObjeto; //-------------------------------------------------- 0117
+        this.peso = peso; //------------------------------------------------------------------------------ 0117
     }
 
     /**
@@ -84,10 +87,10 @@ public class Room
      *     You are in the 'name of room'
      *     Exits: north west southwest
      * @return A description of the room, including exits.
- 	 */
- 	public String getLongDescription(){
- 	  return "Estamos " + description + ".\n" + getExitString();
- 	}
+     */
+    public String getLongDescription(){
+      return "Estamos " + description + ".\n" + getExitString()+ ".\n Dispones del item. " +descripcionObjeto+ ".\n con un peso de:" +peso;
+    }
 
 
 }
