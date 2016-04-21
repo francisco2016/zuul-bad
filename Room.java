@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -20,19 +21,18 @@ public class Room
     //HashMap para enlazar cadenas con objetos de tipo Room
     private HashMap<String, Room> exit;//-------------------------------------------------------------------------- 0112
     //para añadir items a las habitaciones.//--------------------------------------------------------------------- 0117
-    private String descripcionObjeto;
-    private int peso;
+    private ArrayList<Item> listaItems;//------------------------------------------------------------------------- 0118
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-      public Room(String description, String descripcionObjeto, int peso) {
+      public Room(String description) {
         this.description = description;
         exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
-        this.descripcionObjeto = descripcionObjeto; //-------------------------------------------------- 0117
-        this.peso = peso; //------------------------------------------------------------------------------ 0117
+        listaItems = new ArrayList<>();
     }
 
     /**
@@ -80,8 +80,8 @@ public class Room
             exitsDescription += direction + " ";
         }
         return exitsDescription;
-    }
-    
+    } 
+     
     /**
      * Return a long description of this room, of the form:---------------------------------------- 0114
      *     You are in the 'name of room'
@@ -89,8 +89,29 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-      return "Estamos " + description + ".\n" + getExitString()+ ".\n Dispones del item. " +descripcionObjeto+ ".\n con un peso de:" +peso;
+      //return "Estamos " + description + ".\n" + getExitString();
+      String descripcion = "";
+      if(listaItems.size() !=0){
+        for(Item item : listaItems){
+            descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n Tenemos el objeto " +
+             item.getDescripcionItem()+ ".\nCon un peso de: " +item.getPesoItem()+ " kg. ";
+        }
+      }
+      else{descripcion += "No tenemos más objetos utiles.";}
+      return descripcion;
     }
 
-
+    /**
+    * para poder añadir items en las habitaciones ------------------------------------------------ 0118 
+    */
+    public void addItem(Item item){
+        listaItems.add(item);
+    }
+    
 }
+
+
+
+
+
+

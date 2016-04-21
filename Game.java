@@ -34,14 +34,22 @@ public class Game
         Room vesti, coci, traste,terraza, salon, biblio, h1 ;
 
         // create the rooms
-       vesti = new Room("este vestíbulo me dice que estamos dentro.", "paragüas ", 1);
-        coci = new Room("  en la cocina, me tomo un vaso de agua.", "tijeras ", 1);
-        traste = new Room("en este trastero hay cosas interesantes.", "alicates", 2);
-        terraza = new Room("terraza con vistas al mar.", "escaleras", 5);
-        salon = new Room("en este salón ya se ve algo más de color.", "lampara", 4);
-        biblio = new Room("en esta biblioteca está lo que buscamos.", "enciclopedia", 5);
-        h1 = new Room(" h1 habitación standar, nada nuevo", "tocaDiscos", 6);
-
+        vesti = new Room("este vestíbulo me dice que estamos dentro.");
+        coci = new Room("  en la cocina, me tomo un vaso de agua.");
+        traste = new Room("en este trastero hay cosas interesantes.");
+        terraza = new Room("terraza con vistas al mar.");
+        salon = new Room("en este salón ya se ve algo más de color.");
+        biblio = new Room("en esta biblioteca está lo que buscamos.");
+        h1 = new Room(" h1 habitación standar, nada nuevo.");
+        
+        //------------------------------------------------------0118
+        vesti.addItem(new Item("planos de la casa", 1));
+        coci.addItem(new Item("espada japonesa", 2));
+        traste.addItem(new Item("cuerda de escalar", 5));
+        terraza.addItem(new Item("focos de colores", 10));
+        salon.addItem(new Item("gafas de infrarrojos", 1));
+        biblio.addItem(new Item("claves secretas", 6));
+        h1.addItem(new Item("maletines", 13));
         // initialise room exits
         
         vesti.setExit("north", salon);
