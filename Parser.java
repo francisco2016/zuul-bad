@@ -29,12 +29,18 @@ public class Parser
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
-    
+
+    //     /**
+    //      * para retornar el atributo commands ---------------------------------------------------------- 0116
+    //      */
+    //     public CommandWords getCommands(){
+    //         return commands;
+    //     }
     /**
-     * para retornar el atributo commands ---------------------------------------------------------- 0116
+     * imprime la lista de los comandos ------------------------------------------------ 0116
      */
-    public CommandWords getCommands(){
-        return commands;
+    public void showCommands(){
+        commands.showAll();
     }
     
     /**

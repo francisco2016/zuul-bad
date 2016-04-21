@@ -150,7 +150,8 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         //System.out.println("   go quit help look"); -------------sustituido por....
-        parser.getCommands().showAll();  //-------------------------0116
+       // parser.getCommands().showAll();  //-------------------------0116
+       parser.showCommands();
     }
 
     /** 
