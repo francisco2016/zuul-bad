@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-
+    private Room backRoom; //--------------------------------------------------------- 0119
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,6 +27,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        backRoom = null; //----------------------------------------------------------- 0119
     }
 
     private void createRooms()
@@ -41,7 +42,7 @@ public class Game
         salon = new Room("en este salón ya se ve algo más de color.");
         biblio = new Room("en esta biblioteca está lo que buscamos.");
         h1 = new Room(" h1 habitación standar, nada nuevo.");
-        
+
         //------------------------------------------------------0118
         vesti.addItem(new Item("planos de la casa", 1));
         coci.addItem(new Item("espada japonesa", 2));
@@ -51,33 +52,33 @@ public class Game
         biblio.addItem(new Item("claves secretas", 6));
         h1.addItem(new Item("maletines", 13));
         // initialise room exits
-        
+
         vesti.setExit("north", salon);
         vesti.setExit("east", coci);
-        
+
         coci.setExit("north" , traste);
         coci.setExit("west", vesti);
-        
+
         traste.setExit("north", terraza);
         traste.setExit("south", coci);
         traste.setExit("west", h1);
         traste.setExit("southeast", salon);
-        
+
         terraza.setExit("south", traste );
-        
+
         salon.setExit("north", h1);
         salon.setExit("east", traste);
         salon.setExit("south", vesti);
         salon.setExit("west", biblio);
-        
+
         biblio.setExit("east", salon);
-        
+
         h1.setExit("east", traste);
         h1.setExit("south", salon);
 
         currentRoom = vesti; 
     }
-    
+
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -109,7 +110,7 @@ public class Game
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
         printLocationInfo();
- 
+
         System.out.println();
     }
 
@@ -143,6 +144,16 @@ public class Game
         else if (commandWord.equals("eat")) {//añadido para -----------------------------  0116
             eat();
         }
+        else if (commandWord.equals("back")) {//añadido para -----------------------------  0119
+           if(backRoom == null){
+               System.out.println("No hay regreso posible a la habitación anterior.");
+           }
+           else{
+               currentRoom = backRoom;
+               printLocationInfo();
+               backRoom = null;
+            }
+        }
 
         return wantToQuit;
     }
@@ -161,17 +172,17 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         //System.out.println("   go quit help look"); -------------sustituido por....
-       // parser.getCommands().showAll();  //-------------------------0116
-       parser.showCommands();
+        // parser.getCommands().showAll();  //-------------------------0116
+        parser.showCommands();
     }
-    
+
     /**
      * The player eat ------------------------------------------------------------ 0116
      */
     private void eat(){
         System.out.println("You have eaten now and you are not hungry any more"); 
     }
-    
+
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -189,7 +200,6 @@ public class Game
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
 
-   
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -198,9 +208,9 @@ public class Game
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
             printLocationInfo();
-                        }
-            System.out.println();
-       
+        }
+        System.out.println();
+
     }
 
     /** 
@@ -224,7 +234,13 @@ public class Game
      */
     private void printLocationInfo(){
         System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
-         
+
     }
 
+    
 }
+
+
+
+
+
