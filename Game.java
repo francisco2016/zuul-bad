@@ -1,3 +1,5 @@
+
+import java.util.Stack;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,7 +21,9 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;//permite saber donde se encuentra el jugador.
-    private Room lastRoom; //--------------------------------------------------------- 0119
+    // private Room lastRoom; //--------------------------------------------------------- 0119
+    private Stack<Room> visitedRooms; // -----------------------------------------2º parte del 0119
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -77,7 +81,8 @@ public class Game
         h1.setExit("south", salon);
 
         currentRoom = vesti;
-        lastRoom = null; //----------------------------------------------------------- 0119
+        //lastRoom = null; //----------------------------------------------------------- 0119
+        visitedRooms = new Stack<>();// -----------------------------------------2º parte del 0119
     }
 
     /**
@@ -191,10 +196,11 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            lastRoom = currentRoom;
+            //lastRoom = currentRoom; //----------------------------------------------------------- 0119
+            //utilizamos el mt push() de la claes Stack para en la pila de habitaciones "visitedRoom" para menter en ella 
+            // el objeto curretnRoom  -----------------------------------------2º parte del 0119
+            visitedRooms.push(currentRoom);// -----------------------------------------2º parte del 0119
             currentRoom = nextRoom;
-           // System.out.println("You are " + currentRoom.getDescription());
-            //.out.print("Exits: ");
             printLocationInfo();
         }
         System.out.println();
@@ -236,8 +242,16 @@ public class Game
      * mt que permite volver a la habitación anterior, para añadir un nuevo comando back -------------------------- 0119
      */
     private void back(){
-        currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.
-        printLocationInfo();//cada vez que me muevo invoco a este método.
+       // currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.----0199  1º parte
+       //para que pueda ir regresando más de una posición, utilizo el mt pop() para decirle que la habitación actual va a ser
+       // el elemento que está en la posición de más arriba de visitedRooms, y que lo imprima.
+       if( !visitedRooms.empty() ){
+            currentRoom = visitedRooms.pop();     // -----------------------------------------2º parte del 0119
+            printLocationInfo();//cada vez que me muevo invoco a este método.
+       }
+       else{
+           System.out.println("Estás al principio del juego, no puedes ir más atrás.");
+       }
     }
 }
 
