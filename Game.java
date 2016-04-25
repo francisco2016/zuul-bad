@@ -18,8 +18,8 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Room backRoom; //--------------------------------------------------------- 0119
+    private Room currentRoom;//permite saber donde se encuentra el jugador.
+    private Room lastRoom; //--------------------------------------------------------- 0119
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,7 +27,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        backRoom = null; //----------------------------------------------------------- 0119
+        
     }
 
     private void createRooms()
@@ -76,7 +76,8 @@ public class Game
         h1.setExit("east", traste);
         h1.setExit("south", salon);
 
-        currentRoom = vesti; 
+        currentRoom = vesti;
+        lastRoom = null; //----------------------------------------------------------- 0119
     }
 
     /**
@@ -135,9 +136,7 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
-        else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
-        }
+       
         else if (commandWord.equals("look")) {//añadido para -------------------------------------------------------- 0115
             printLocationInfo();
         }
@@ -145,16 +144,11 @@ public class Game
             eat();
         }
         else if (commandWord.equals("back")) {//añadido para -----------------------------  0119
-           if(backRoom == null){
-               System.out.println("No hay regreso posible a la habitación anterior.");
-           }
-           else{
-               currentRoom = backRoom;
-               printLocationInfo();
-               backRoom = null;
-            }
+           back();
         }
-
+         else if (commandWord.equals("quit")) {
+            wantToQuit = quit(command);
+        }
         return wantToQuit;
     }
 
@@ -174,13 +168,6 @@ public class Game
         //System.out.println("   go quit help look"); -------------sustituido por....
         // parser.getCommands().showAll();  //-------------------------0116
         parser.showCommands();
-    }
-
-    /**
-     * The player eat ------------------------------------------------------------ 0116
-     */
-    private void eat(){
-        System.out.println("You have eaten now and you are not hungry any more"); 
     }
 
     /** 
@@ -204,9 +191,10 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            lastRoom = currentRoom;
             currentRoom = nextRoom;
-            System.out.println("You are " + currentRoom.getDescription());
-            System.out.print("Exits: ");
+           // System.out.println("You are " + currentRoom.getDescription());
+            //.out.print("Exits: ");
             printLocationInfo();
         }
         System.out.println();
@@ -236,9 +224,23 @@ public class Game
         System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
 
     }
-
     
+    /**
+     * The player eat, para añadir un nuevo comando eat------------------------------------------------------------ 0116
+     */
+    private void eat(){
+        System.out.println("You have eaten now and you are not hungry any more"); 
+    }
+
+    /**
+     * mt que permite volver a la habitación anterior, para añadir un nuevo comando back -------------------------- 0119
+     */
+    private void back(){
+        currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.
+        printLocationInfo();//cada vez que me muevo invoco a este método.
+    }
 }
+
 
 
 
