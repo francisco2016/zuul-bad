@@ -39,28 +39,28 @@ public class Game
         Room vesti, coci, traste,terraza, salon, biblio, h1 ;
 
         // create the rooms
-        vesti = new Room("este vestíbulo me dice que estamos dentro.");
-        coci = new Room("  en la cocina, me tomo un vaso de agua.");
-        traste = new Room("en este trastero hay cosas interesantes.");
-        terraza = new Room("terraza con vistas al mar.");
-        salon = new Room("en este salón ya se ve algo más de color.");
-        biblio = new Room("en esta biblioteca está lo que buscamos.");
-        h1 = new Room(" h1 habitación standar, nada nuevo.");
+        vesti = new Room("en vestíbulo de la casa de Donald¡¡¡.");
+        coci = new Room("  en la cocina, registra la nevera Paul.");
+        traste = new Room("en el trastero de los objetos perdidos.");
+        terraza = new Room(" en la terraza con vistas al yate de Donald¡¡¡¡.");
+        salon = new Room("en el salón que decoró la princesa Lity¡¡.");
+        biblio = new Room("en la biblioteca que diseñó Susho.");
+        h1 = new Room(" en la  h1 habitación standar, con su espejito mágico.");
 
         //------------------------------------------------------0118
-        vesti.addItem(new Item("planos de la casa", 1));
-        coci.addItem(new Item("espada japonesa", 2));
-        traste.addItem(new Item("cuerda de escalar", 5));
-        terraza.addItem(new Item("focos de colores", 10));
-        salon.addItem(new Item("gafas de infrarrojos", 1));
-        biblio.addItem(new Item("claves secretas", 6));
-        h1.addItem(new Item("maletines", 13));
+        vesti.addItem(new Item(" los planos de la casa", 1));
+        coci.addItem(new Item(" una espada japonesa", 2));
+        traste.addItem(new Item(" una cuerda de escalar", 5));
+        terraza.addItem(new Item(" focos de colores", 10));
+        salon.addItem(new Item(" las gafas de infrarrojos", 1));
+        biblio.addItem(new Item(" las claves secretas de los diamantes", 6));
+        h1.addItem(new Item(" los maletines grises.", 13));
         // initialise room exits
 
         vesti.setExit("north", salon);
         vesti.setExit("east", coci);
 
-        coci.setExit("north" , traste);
+        coci.setExit(" north" , traste);
         coci.setExit("west", vesti);
 
         traste.setExit("north", terraza);
@@ -68,7 +68,7 @@ public class Game
         traste.setExit("west", h1);
         traste.setExit("southeast", salon);
 
-        terraza.setExit("south", traste );
+        terraza.setExit("podemos ir al south", traste );
 
         salon.setExit("north", h1);
         salon.setExit("east", traste);
@@ -113,7 +113,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
+        System.out.println("you are in the house lobby xx ") ;
         System.out.print("Exits: ");
         printLocationInfo();
 
