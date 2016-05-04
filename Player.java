@@ -1,4 +1,4 @@
-
+import java.util.Stack;
 /**
  * Write a description of class Player here.
  * 
@@ -7,27 +7,74 @@
  */
 public class Player
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    private Room roomActual;
+    private Stack<Room> listaRoom;
 
     /**
      * Constructor for objects of class Player
      */
     public Player()
     {
-        // initialise instance variables
-        x = 0;
+        roomActual = null;
+        listaRoom = new Stack<>();
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Metodo que nos permitira fijar una calle al jugador.
      */
-    public int sampleMethod(int y)
+    public void fijarRoom(Room room){
+        if(roomActual != null){
+            listaRoom.push(roomActual);
+        }
+        roomActual = room;
+    }
+    
+     /**
+     * Metodo que imprime la informacion de localizacion
+     */
+    public void printLocationInfo(){
+        System.out.println(roomActual.getLongDescription());
+        System.out.println();
+    }
+    
+    /**
+     * Metodo que volvera a la calle anterior.
+     */
+    public void goToLastRoom(){
+        if(!listaRoom.empty()){
+            roomActual = listaRoom.pop();
+            printLocationInfo();
+        }
+        else{
+            System.out.println("No se puede volver!");
+        }
+    }
+    
+     /** 
+     * Try to go in one direction. If there is an exit, enter
+     * the new room, otherwise print an error message.
+     */
+    public void goRoom(Command command) 
     {
-        // put your code here
-        return x + y;
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("A donde vamos?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        // Try to leave current room.
+        Room nextRoom = roomActual.getExit(direction);
+
+        if (nextRoom == null) {
+            System.out.println("No hay salida!");
+        }
+        else {
+            listaRoom.push(roomActual);
+            roomActual = nextRoom;
+            printLocationInfo();
+            System.out.println();
+        }
     }
 }
