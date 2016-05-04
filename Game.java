@@ -12,7 +12,7 @@ public class Game
      */
     public Game() 
     {
-         player = new Player(); 
+         player = new Player(5); 
         createRooms();
         parser = new Parser();
               
@@ -32,13 +32,13 @@ public class Game
         h1 = new Room(" en la  h1 habitación standar, con su espejito mágico.");
 
         //------------------------------------------------------0118
-        vesti.addItem(new Item(" los planos de la casa", 1));
-        coci.addItem(new Item(" una espada japonesa", 2));
-        traste.addItem(new Item(" una cuerda de escalar", 5));
-        terraza.addItem(new Item(" focos de colores", 10));
-        salon.addItem(new Item(" las gafas de infrarrojos", 1));
-        biblio.addItem(new Item(" las claves secretas de los diamantes", 6));
-        h1.addItem(new Item(" los maletines grises.", 13));
+        vesti.addItem(new Item("planos", 1));
+        coci.addItem(new Item("espada", 2));
+        traste.addItem(new Item("cuerda", 5));
+        terraza.addItem(new Item("focos", 10));
+        salon.addItem(new Item("gafas", 1));
+        biblio.addItem(new Item("claves", 6));
+        h1.addItem(new Item("maletines", 13));
         // initialise room exits
 
         vesti.setExit("north", salon);
@@ -131,8 +131,14 @@ public class Game
         else if (commandWord.equals("eat")) {//añadido para -----------------------------  0116
             System.out.println("You have eaten now and you are not hungry any more");
         }
-        else if (commandWord.equals("back")) { 
+        else if (commandWord.equals("back")) { //añadido para -----------------------------  0119
             player.goToLastRoom();
+        }
+        else if (commandWord.equals("take")) { //añadido para -----------------------------  0120
+            player.takeItem(command.getSecondWord());
+        }
+        else if (commandWord.equals("drop")) { //añadido para -----------------------------  0120
+            player.dropItem(command.getSecondWord());
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);

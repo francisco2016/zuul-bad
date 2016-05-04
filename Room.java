@@ -29,7 +29,7 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-      public Room(String description) {
+    public Room(String description) {
         this.description = description;
         exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
         listaItems = new ArrayList<>();
@@ -43,7 +43,7 @@ public class Room
     public void setExit(String direction, Room neighbor){
         exit.put(direction, neighbor);
     }
-    
+
     /**
      * @return The description of the room.
      */
@@ -57,9 +57,9 @@ public class Room
      * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        
+
         return exit.get(adress);
-       
+
     }
 
     /**
@@ -68,7 +68,7 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){//----------------------------------------------------------------- 0111
- 
+
         Set<String> namesOfDirections = exit.keySet();//---------------------------------------0113    0113
         String exitsDescription = "";
         for(String direction : namesOfDirections){
@@ -76,7 +76,7 @@ public class Room
         }
         return exitsDescription;
     } 
-     
+
     /**
      * Return a long description of this room, of the form:---------------------------------------- 0114
      *     You are in the 'name of room'
@@ -84,26 +84,62 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-      //return "Estamos " + description + ".\n" + getExitString();
-      String descripcion = "";
-      if(listaItems.size() !=0){
-        for(Item item : listaItems){
-            descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n En esta habitación tenemos  " +
-             item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg. ";
+        //return "Estamos " + description + ".\n" + getExitString();
+        String descripcion = "";
+        if(listaItems.size() !=0){
+            for(Item item : listaItems){
+                descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n En esta habitación tenemos  " +
+                item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg. ";
+            }
         }
-      }
-      else{descripcion += "No tenemos más objetos utiles.";}
-      return descripcion;
+        else{descripcion += "No tenemos más objetos utiles.";}
+        return descripcion;
     }
 
     /**
-    * para poder añadir items en las habitaciones ------------------------------------------------ 0118 
-    */
+     * para poder añadir items en las habitaciones ------------------------------------------------ 0118 
+     */
     public void addItem(Item item){
         listaItems.add(item);
     }
-    
+
+    /**
+     * mt para buscar items en las habitaciones --------------------------------------------------- 0120
+     */
+    public Item buscarItem(String descripcion){
+        int i = 0;
+        boolean encontrado = false;
+        Item item = null;
+        while(i < listaItems.size() && !encontrado){
+            if(listaItems.get(i).getDescripcionItem().equals(descripcion)){
+                item = listaItems.get(i);
+                encontrado = true;
+            }
+            i++;
+        }
+        return item;
+    }
+
+    /**
+     * mt para eliminar los items de las habitaciones.--------------------------------------------------- 0120
+     */
+    public void eliminaItemHabitacion(Item item){
+        int i = 0;
+        boolean encontrado = false;
+        while(i < listaItems.size() && !encontrado){
+            if( listaItems.get(i).getDescripcionItem().equals(item.getDescripcionItem())){
+                listaItems.remove(listaItems.get(i));
+                encontrado = true;
+            }
+            i++;
+        }
+    }
 }
+
+
+
+
+
 
 
 
