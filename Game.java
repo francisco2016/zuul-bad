@@ -1,26 +1,11 @@
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
- * 
- *  To play this game, create an instance of this class and call the "play"
- *  method.
- * 
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
- *  executes the commands that the parser returns.
- * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ *  Francisco
  */
 
 public class Game 
 {
     private Parser parser;
-    // private Room currentRoom;//permite saber donde se encuentra el jugador.
-    // private Room lastRoom; //--------------------------------------------------------- 0119
-    // private Stack<Room> visitedRooms; // -----------------------------------------2º parte del 0119
+     
     private Player player;
     /**
      * Create the game and initialise its internal map.
@@ -173,38 +158,6 @@ public class Game
         parser.showCommands();
     }
 
-    //     /** 
-    //      * Try to go in one direction. If there is an exit, enter
-    //      * the new room, otherwise print an error message.
-    //      */
-    //     private void goRoom(Command command) 
-    //     {
-    //         if(!command.hasSecondWord()) {
-    //             // if there is no second word, we don't know where to go...
-    //             System.out.println("Go where?");
-    //             return;
-    //         }
-    // 
-    //         String direction = command.getSecondWord();
-    // 
-    //         // Try to leave current room.
-    //         Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
-    // 
-    //         if (nextRoom == null) {
-    //             System.out.println("There is no door!");
-    //         }
-    //         else {
-    //             //lastRoom = currentRoom; //----------------------------------------------------------- 0119
-    //             //utilizamos el mt push() de la claes Stack para en la pila de habitaciones "visitedRoom" para menter en ella 
-    //             // el objeto curretnRoom  -----------------------------------------2º parte del 0119
-    //             visitedRooms.push(currentRoom);// -----------------------------------------2º parte del 0119
-    //             currentRoom = nextRoom;
-    //             printLocationInfo();
-    //         }
-    //         System.out.println();
-    // 
-    //     }
-
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -221,35 +174,5 @@ public class Game
         }
     }
 
-    //     /**
-    //      *  resuelve la repetición de código existente en los metodos printWelcome ygoRoom 
-    //      */
-    //     private void printLocationInfo(){
-    //         System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
-    // 
-    //     }
-
-    //     /**
-    //      * The player eat, para añadir un nuevo comando eat------------------------------------------------------------ 0116
-    //      */
-    //     private void eat(){
-    //         System.out.println("You have eaten now and you are not hungry any more"); 
-    //     }
-
-    //     /**
-    //      * mt que permite volver a la habitación anterior, para añadir un nuevo comando back -------------------------- 0119
-    //      */
-    //     private void back(){
-    //         // currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.----0199  1º parte
-    //         //para que pueda ir regresando más de una posición, utilizo el mt pop() para decirle que la habitación actual va a ser
-    //         // el elemento que está en la posición de más arriba de visitedRooms, y que lo imprima.
-    //         if( !visitedRooms.empty() ){
-    //             currentRoom = visitedRooms.pop();     // -----------------------------------------2º parte del 0119
-    //             printLocationInfo();//cada vez que me muevo invoco a este método.
-    //         }
-    //         else{
-    //             System.out.println("Estás al principio del juego, no puedes ir más atrás.");
-    //         }
-    //     }
 }
 
