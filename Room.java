@@ -38,17 +38,12 @@ public class Room
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
-     * @param neighbor The room in the given direction.--------------------------------------------------------------------- 0113
+     * @param neighbor The room in the given direction.
      */
-    //-0113 para facilitar el que la clase Game pueda elegir la salida de una localización, tenemos que eliminar el mt setExits(R) 
-    // porque con sus parámetros está limitando las posibilidades.
-    //para ello almacenamos en el HashMap la cadena que se indique como parámetro enlazada con la habitación que es indique
-    // como parámetro. En direction podemos especificar cualquier tipo de dirección,,, subir, bajar,noroeste etc. y siempre 
-    //quedará almacenada en el HashMap exit
     public void setExit(String direction, Room neighbor){
         exit.put(direction, neighbor);
-    }//-0113 esto supone tener que hacer cambios en la clase Game. Ahora podemos borrar el mt setExits(R)
-
+    }
+    
     /**
      * @return The description of the room.
      */
