@@ -93,8 +93,8 @@ public class Room
       String descripcion = "";
       if(listaItems.size() !=0){
         for(Item item : listaItems){
-            descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n Tenemos el objeto " +
-             item.getDescripcionItem()+ ".\nCon un peso de: " +item.getPesoItem()+ " kg. ";
+            descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n En esta habitación tenemos  " +
+             item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg. ";
         }
       }
       else{descripcion += "No tenemos más objetos utiles.";}

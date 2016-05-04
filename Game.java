@@ -1,5 +1,3 @@
-
-import java.util.Stack;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -20,18 +18,19 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;//permite saber donde se encuentra el jugador.
+    // private Room currentRoom;//permite saber donde se encuentra el jugador.
     // private Room lastRoom; //--------------------------------------------------------- 0119
-    private Stack<Room> visitedRooms; // -----------------------------------------2º parte del 0119
-    
+    // private Stack<Room> visitedRooms; // -----------------------------------------2º parte del 0119
+    private Player player;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+         player = new Player(); 
         createRooms();
         parser = new Parser();
-        
+              
     }
 
     private void createRooms()
@@ -39,28 +38,28 @@ public class Game
         Room vesti, coci, traste,terraza, salon, biblio, h1 ;
 
         // create the rooms
-        vesti = new Room("este vestíbulo me dice que estamos dentro.");
-        coci = new Room("  en la cocina, me tomo un vaso de agua.");
-        traste = new Room("en este trastero hay cosas interesantes.");
-        terraza = new Room("terraza con vistas al mar.");
-        salon = new Room("en este salón ya se ve algo más de color.");
-        biblio = new Room("en esta biblioteca está lo que buscamos.");
-        h1 = new Room(" h1 habitación standar, nada nuevo.");
+        vesti = new Room("en vestíbulo de la casa de Donald¡¡¡.");
+        coci = new Room("  en la cocina, registra la nevera Paul.");
+        traste = new Room("en el trastero de los objetos perdidos.");
+        terraza = new Room(" en la terraza con vistas al yate de Donald¡¡¡¡.");
+        salon = new Room("en el salón que decoró la princesa Lity¡¡.");
+        biblio = new Room("en la biblioteca que diseñó Susho.");
+        h1 = new Room(" en la  h1 habitación standar, con su espejito mágico.");
 
         //------------------------------------------------------0118
-        vesti.addItem(new Item("planos de la casa", 1));
-        coci.addItem(new Item("espada japonesa", 2));
-        traste.addItem(new Item("cuerda de escalar", 5));
-        terraza.addItem(new Item("focos de colores", 10));
-        salon.addItem(new Item("gafas de infrarrojos", 1));
-        biblio.addItem(new Item("claves secretas", 6));
-        h1.addItem(new Item("maletines", 13));
+        vesti.addItem(new Item(" los planos de la casa", 1));
+        coci.addItem(new Item(" una espada japonesa", 2));
+        traste.addItem(new Item(" una cuerda de escalar", 5));
+        terraza.addItem(new Item(" focos de colores", 10));
+        salon.addItem(new Item(" las gafas de infrarrojos", 1));
+        biblio.addItem(new Item(" las claves secretas de los diamantes", 6));
+        h1.addItem(new Item(" los maletines grises.", 13));
         // initialise room exits
 
         vesti.setExit("north", salon);
         vesti.setExit("east", coci);
 
-        coci.setExit("north" , traste);
+        coci.setExit(" north" , traste);
         coci.setExit("west", vesti);
 
         traste.setExit("north", terraza);
@@ -68,7 +67,7 @@ public class Game
         traste.setExit("west", h1);
         traste.setExit("southeast", salon);
 
-        terraza.setExit("south", traste );
+        terraza.setExit("podemos ir al south", traste );
 
         salon.setExit("north", h1);
         salon.setExit("east", traste);
@@ -80,9 +79,8 @@ public class Game
         h1.setExit("east", traste);
         h1.setExit("south", salon);
 
-        currentRoom = vesti;
-        //lastRoom = null; //----------------------------------------------------------- 0119
-        visitedRooms = new Stack<>();// -----------------------------------------2º parte del 0119
+        player.fijarRoom(vesti);
+
     }
 
     /**
@@ -113,9 +111,9 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
+        System.out.println("you are in the house lobby xx ") ;
         System.out.print("Exits: ");
-        printLocationInfo();
+        player.printLocationInfo();//----------0120
 
         System.out.println();
     }
@@ -139,19 +137,19 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            goRoom(command);
+            player.goRoom(command);
         }
-       
+
         else if (commandWord.equals("look")) {//añadido para -------------------------------------------------------- 0115
-            printLocationInfo();
+            player.printLocationInfo();
         }
         else if (commandWord.equals("eat")) {//añadido para -----------------------------  0116
-            eat();
+            System.out.println("You have eaten now and you are not hungry any more");
         }
-        else if (commandWord.equals("back")) {//añadido para -----------------------------  0119
-           back();
+        else if (commandWord.equals("back")) { 
+            player.goToLastRoom();
         }
-         else if (commandWord.equals("quit")) {
+        else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
         return wantToQuit;
@@ -175,37 +173,37 @@ public class Game
         parser.showCommands();
     }
 
-    /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            //lastRoom = currentRoom; //----------------------------------------------------------- 0119
-            //utilizamos el mt push() de la claes Stack para en la pila de habitaciones "visitedRoom" para menter en ella 
-            // el objeto curretnRoom  -----------------------------------------2º parte del 0119
-            visitedRooms.push(currentRoom);// -----------------------------------------2º parte del 0119
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
-        System.out.println();
-
-    }
+    //     /** 
+    //      * Try to go in one direction. If there is an exit, enter
+    //      * the new room, otherwise print an error message.
+    //      */
+    //     private void goRoom(Command command) 
+    //     {
+    //         if(!command.hasSecondWord()) {
+    //             // if there is no second word, we don't know where to go...
+    //             System.out.println("Go where?");
+    //             return;
+    //         }
+    // 
+    //         String direction = command.getSecondWord();
+    // 
+    //         // Try to leave current room.
+    //         Room nextRoom = currentRoom.getExit(direction);//------------------------------------------------- 0111
+    // 
+    //         if (nextRoom == null) {
+    //             System.out.println("There is no door!");
+    //         }
+    //         else {
+    //             //lastRoom = currentRoom; //----------------------------------------------------------- 0119
+    //             //utilizamos el mt push() de la claes Stack para en la pila de habitaciones "visitedRoom" para menter en ella 
+    //             // el objeto curretnRoom  -----------------------------------------2º parte del 0119
+    //             visitedRooms.push(currentRoom);// -----------------------------------------2º parte del 0119
+    //             currentRoom = nextRoom;
+    //             printLocationInfo();
+    //         }
+    //         System.out.println();
+    // 
+    //     }
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -223,40 +221,35 @@ public class Game
         }
     }
 
-    /**
-     *  resuelve la repetición de código existente en los metodos printWelcome ygoRoom 
-     */
-    private void printLocationInfo(){
-        System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
+    //     /**
+    //      *  resuelve la repetición de código existente en los metodos printWelcome ygoRoom 
+    //      */
+    //     private void printLocationInfo(){
+    //         System.out.println(currentRoom.getLongDescription());//--------------------------------------------------- 0114
+    // 
+    //     }
 
-    }
-    
-    /**
-     * The player eat, para añadir un nuevo comando eat------------------------------------------------------------ 0116
-     */
-    private void eat(){
-        System.out.println("You have eaten now and you are not hungry any more"); 
-    }
+    //     /**
+    //      * The player eat, para añadir un nuevo comando eat------------------------------------------------------------ 0116
+    //      */
+    //     private void eat(){
+    //         System.out.println("You have eaten now and you are not hungry any more"); 
+    //     }
 
-    /**
-     * mt que permite volver a la habitación anterior, para añadir un nuevo comando back -------------------------- 0119
-     */
-    private void back(){
-       // currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.----0199  1º parte
-       //para que pueda ir regresando más de una posición, utilizo el mt pop() para decirle que la habitación actual va a ser
-       // el elemento que está en la posición de más arriba de visitedRooms, y que lo imprima.
-       if( !visitedRooms.empty() ){
-            currentRoom = visitedRooms.pop();     // -----------------------------------------2º parte del 0119
-            printLocationInfo();//cada vez que me muevo invoco a este método.
-       }
-       else{
-           System.out.println("Estás al principio del juego, no puedes ir más atrás.");
-       }
-    }
+    //     /**
+    //      * mt que permite volver a la habitación anterior, para añadir un nuevo comando back -------------------------- 0119
+    //      */
+    //     private void back(){
+    //         // currentRoom = lastRoom; //le decimos que la habitación en la que está es la última en la que estuvo.----0199  1º parte
+    //         //para que pueda ir regresando más de una posición, utilizo el mt pop() para decirle que la habitación actual va a ser
+    //         // el elemento que está en la posición de más arriba de visitedRooms, y que lo imprima.
+    //         if( !visitedRooms.empty() ){
+    //             currentRoom = visitedRooms.pop();     // -----------------------------------------2º parte del 0119
+    //             printLocationInfo();//cada vez que me muevo invoco a este método.
+    //         }
+    //         else{
+    //             System.out.println("Estás al principio del juego, no puedes ir más atrás.");
+    //         }
+    //     }
 }
-
-
-
-
-
 
