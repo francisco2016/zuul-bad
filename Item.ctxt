@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=descripcionItem\ pesoItem\ disponible
+comment0.target=Item(java.lang.String,\ int,\ boolean)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Items\r\n
+comment1.params=
+comment1.target=java.lang.String\ getDescripcionItem()
+comment1.text=\r\n\ serie\ de\ m\u00E9todos\ para\ retornar\ el\ valor\ de\ los\ atributos\r\n
+comment2.params=
+comment2.target=int\ getPesoItem()
+comment3.params=
+comment3.target=boolean\ getDisponible()
+comment3.text=\r\n\ mt\ para\ informar\ si\ el\ objeto\ est\u00E1\ disponible.\r\n
+numComments=4

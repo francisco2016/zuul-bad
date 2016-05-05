@@ -29,7 +29,7 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-      public Room(String description) {
+    public Room(String description) {
         this.description = description;
         exit = new HashMap<>();//----------------------------------------------------------------------------- 0112
         listaItems = new ArrayList<>();
@@ -38,16 +38,11 @@ public class Room
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
-     * @param neighbor The room in the given direction.--------------------------------------------------------------------- 0113
+     * @param neighbor The room in the given direction.
      */
-    //-0113 para facilitar el que la clase Game pueda elegir la salida de una localización, tenemos que eliminar el mt setExits(R) 
-    // porque con sus parámetros está limitando las posibilidades.
-    //para ello almacenamos en el HashMap la cadena que se indique como parámetro enlazada con la habitación que es indique
-    // como parámetro. En direction podemos especificar cualquier tipo de dirección,,, subir, bajar,noroeste etc. y siempre 
-    //quedará almacenada en el HashMap exit
     public void setExit(String direction, Room neighbor){
         exit.put(direction, neighbor);
-    }//-0113 esto supone tener que hacer cambios en la clase Game. Ahora podemos borrar el mt setExits(R)
+    }
 
     /**
      * @return The description of the room.
@@ -62,9 +57,9 @@ public class Room
      * o null si no hay salida.
      */
     public Room getExit(String adress){//----------------------------------------------------------------- 0111
-        
+
         return exit.get(adress);
-       
+
     }
 
     /**
@@ -73,15 +68,15 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){//----------------------------------------------------------------- 0111
- 
+
         Set<String> namesOfDirections = exit.keySet();//---------------------------------------0113    0113
-        String exitsDescription = "";
+        String exitsDescription = "Salidas: ";
         for(String direction : namesOfDirections){
             exitsDescription += direction + " ";
         }
-        return exitsDescription;
+        return exitsDescription + "\n";
     } 
-     
+
     /**
      * Return a long description of this room, of the form:---------------------------------------- 0114
      *     You are in the 'name of room'
@@ -89,26 +84,64 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-      //return "Estamos " + description + ".\n" + getExitString();
-      String descripcion = "";
-      if(listaItems.size() !=0){
-        for(Item item : listaItems){
-            descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n En esta habitación tenemos  " +
-             item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg. ";
+        //return "Estamos " + description + ".\n" + getExitString();
+        String descripcion = "Estamos " + description;
+        if(listaItems.size() !=0){
+            descripcion += ".\n En esta habitación tenemos\n";
+            for(Item item : listaItems){
+                
+                descripcion += item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg.\n ";
+            }
         }
-      }
-      else{descripcion += "No tenemos más objetos utiles.";}
-      return descripcion;
+        else{descripcion += "En esta habitación no tenemos ningún items.\n";}
+        descripcion += getExitString();
+        return descripcion;
     }
 
     /**
-    * para poder añadir items en las habitaciones ------------------------------------------------ 0118 
-    */
+     * para poder añadir items en las habitaciones ------------------------------------------------ 0118 
+     */
     public void addItem(Item item){
         listaItems.add(item);
     }
-    
+
+    /**
+     * mt para buscar items en las habitaciones --------------------------------------------------- 0120
+     */
+    public Item buscarItem(String descripcion){
+        int i = 0;
+        boolean encontrado = false;
+        Item item = null;
+        while(i < listaItems.size() && !encontrado){
+            if(listaItems.get(i).getDescripcionItem().equals(descripcion)){
+                item = listaItems.get(i);
+                encontrado = true;
+            }
+            i++;
+        }
+        return item;
+    }
+
+    /**
+     * mt para eliminar los items de las habitaciones.--------------------------------------------------- 0120
+     */
+    public void eliminaItemHabitacion(Item item){
+        int i = 0;
+        boolean encontrado = false;
+        while(i < listaItems.size() && !encontrado){
+            if( listaItems.get(i).getDescripcionItem().equals(item.getDescripcionItem())){
+                listaItems.remove(listaItems.get(i));
+                encontrado = true;
+            }
+            i++;
+        }
+    }
 }
+
+
+
+
+
 
 
 

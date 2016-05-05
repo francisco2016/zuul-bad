@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;//---------------------- 0120
 /**
  * Write a description of class Player here.
  * 
@@ -9,16 +10,59 @@ public class Player
 {
     private Room roomActual;
     private Stack<Room> listaRoom;
+    private ArrayList<Item> listaItems;//------------------- 0120
+    private float pesoMaximo;
+    private float pesoActual;
 
     /**
      * Constructor for objects of class Player
      */
-    public Player()
+    public Player(float pesoMaximo)
     {
         roomActual = null;
         listaRoom = new Stack<>();
+         listaItems = new ArrayList<>();//-------------------------------- 0120
+        this.pesoMaximo = pesoMaximo;
+        pesoActual = 0;
+        
     }
-
+    
+    /**
+     * mt. para que el jugador pueda tomar items de las habitaciones.-------------------------------- 0120
+     */
+    public void takeItem(String descripcion){
+        Item item = roomActual.buscarItem(descripcion);
+        if(item != null && pesoActual + item.getPesoItem() < pesoMaximo){
+            listaItems.add(item);
+            pesoActual += item.getPesoItem();
+            roomActual.eliminaItemHabitacion(item);
+        }
+        else{
+            System.out.println("Imposible añadir el item.");
+        }
+    }
+    
+    /**
+     * mt para que el jugador pueda dejar items en las habitaciones.------------------------------------ 0120
+     */
+    public  void dropItem(String descripcion){
+        int i = 0;
+        boolean encontrado = false;
+        while(i < listaItems.size() && !encontrado){
+            if(listaItems.get(i).getDescripcionItem().equals(descripcion)){
+                roomActual.addItem(listaItems.get(i));
+                pesoActual -= listaItems.get(i).getPesoItem();
+                listaItems.remove(listaItems.get(i));
+                encontrado = true;
+                System.out.println("Item dejado");
+            }
+            i++;
+        }
+        if(!encontrado){
+            System.out.println("No hay items para dejar");
+        }
+    }
+    
     /**
      * Metodo que nos permitira fijar una calle al jugador.
      */
@@ -77,4 +121,47 @@ public class Player
             System.out.println();
         }
     }
+    
+    /**
+     * mt para mostrar los items que el jugador lleba cogidos. ------------------------------------------- 0120
+     */
+    public void showItems(){
+        if(listaItems.size() != 0){
+            System.out.println("----------------");
+            System.out.println("Items acumulados.");
+            System.out.println("");
+            for(int i = 0; i < listaItems.size(); i++){
+                 System.out.println((i+1)+ ". " +listaItems.get(i).getDescripcionItem()
+                     + ": " +listaItems.get(i).getPesoItem() + "kg");
+            }
+            System.out.println("");
+        }
+        else{
+            System.out.println("No tienes items guardados.");
+        }
+    }
+    
+    public Room getCurrentRoom()
+    {
+        return roomActual;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
