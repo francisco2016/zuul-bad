@@ -70,11 +70,11 @@ public class Room
     public String getExitString(){//----------------------------------------------------------------- 0111
 
         Set<String> namesOfDirections = exit.keySet();//---------------------------------------0113    0113
-        String exitsDescription = "";
+        String exitsDescription = "Salidas: ";
         for(String direction : namesOfDirections){
             exitsDescription += direction + " ";
         }
-        return exitsDescription;
+        return exitsDescription + "\n";
     } 
 
     /**
@@ -85,14 +85,16 @@ public class Room
      */
     public String getLongDescription(){
         //return "Estamos " + description + ".\n" + getExitString();
-        String descripcion = "";
+        String descripcion = "Estamos " + description;
         if(listaItems.size() !=0){
+            descripcion += ".\n En esta habitación tenemos\n";
             for(Item item : listaItems){
-                descripcion += "Estamos " + description + ".\n" + getExitString()+ ".\n En esta habitación tenemos  " +
-                item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg. ";
+                
+                descripcion += item.getDescripcionItem()+ ", su  peso es de: " +item.getPesoItem()+ " kg.\n ";
             }
         }
-        else{descripcion += "No tenemos más objetos utiles.";}
+        else{descripcion += "En esta habitación no tenemos ningún items.\n";}
+        descripcion += getExitString();
         return descripcion;
     }
 

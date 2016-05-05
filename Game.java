@@ -32,13 +32,20 @@ public class Game
         h1 = new Room(" en la  h1 habitación standar, con su espejito mágico.");
 
         //------------------------------------------------------0118
-        vesti.addItem(new Item("planos", 1));
-        coci.addItem(new Item("espada", 2));
-        traste.addItem(new Item("cuerda", 5));
-        terraza.addItem(new Item("focos", 10));
-        salon.addItem(new Item("gafas", 1));
-        biblio.addItem(new Item("claves", 6));
-        h1.addItem(new Item("maletines", 13));
+        vesti.addItem(new Item("planos", 1, true));
+        vesti.addItem(new Item("cuadros", 5, true));
+        coci.addItem(new Item("espada", 2, false));
+        coci.addItem(new Item("rayoLaser", 5, true));
+        traste.addItem(new Item("cuerda", 5, false));
+        traste.addItem(new Item("motoSierra", 5, true));
+        terraza.addItem(new Item("focos", 10, true));
+        terraza.addItem(new Item("sonbrilla", 10, false));
+        salon.addItem(new Item("gafas", 1, true));
+        salon.addItem(new Item("telescopio", 1, false));
+        biblio.addItem(new Item("claves", 6, true));
+        biblio.addItem(new Item("escaleras", 6, false));
+        h1.addItem(new Item("maletines", 13, true));
+        h1.addItem(new Item("cortador", 13, false));
         // initialise room exits
 
         vesti.setExit("north", salon);
@@ -97,7 +104,7 @@ public class Game
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println("you are in the house lobby xx ") ;
-        System.out.print("Exits: ");
+        System.out.print(player.getCurrentRoom().getExitString());
         player.printLocationInfo();//----------0120
 
         System.out.println();
@@ -139,6 +146,9 @@ public class Game
         }
         else if (commandWord.equals("drop")) { //añadido para -----------------------------  0120
             player.dropItem(command.getSecondWord());
+        }
+        else if (commandWord.equals("items")) { //añadido para -----------------------------  0120
+            player.showItems();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);

@@ -121,4 +121,47 @@ public class Player
             System.out.println();
         }
     }
+    
+    /**
+     * mt para mostrar los items que el jugador lleba cogidos. ------------------------------------------- 0120
+     */
+    public void showItems(){
+        if(listaItems.size() != 0){
+            System.out.println("----------------");
+            System.out.println("Items acumulados.");
+            System.out.println("");
+            for(int i = 0; i < listaItems.size(); i++){
+                 System.out.println((i+1)+ ". " +listaItems.get(i).getDescripcionItem()
+                     + ": " +listaItems.get(i).getPesoItem() + "kg");
+            }
+            System.out.println("");
+        }
+        else{
+            System.out.println("No tienes items guardados.");
+        }
+    }
+    
+    public Room getCurrentRoom()
+    {
+        return roomActual;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
